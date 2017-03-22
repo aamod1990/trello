@@ -1,0 +1,768 @@
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('fonts/BebasNeue-webfont.eot');
+    src: url('fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/BebasNeue-webfont.woff') format('woff'), url('fonts/BebasNeue-webfont.ttf') format('truetype'), url('fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* CSS reset */
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q:before,
+q:after {
+    content: '';
+}
+
+abbr,
+acronym {
+    border: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+
+/* General Demo Style */
+
+body {
+    font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+    background: #fff url(../images/bg.jpeg) no-repeat top left;
+    font-weight: 400;
+    font-size: 15px;
+    color: #1d3c41;
+    overflow-y: scroll;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.clr {
+    clear: both;
+}
+
+.container > header {
+    padding: 20px 30px 10px 30px;
+    margin: 0px 20px 10px 20px;
+    position: relative;
+    display: block;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.container > header h1 {
+    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+    font-size: 35px;
+    line-height: 35px;
+    position: relative;
+    font-weight: 400;
+    color: rgba(26, 89, 120, 0.9);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 0px 0px 5px 0px;
+}
+
+.container > header h1 span {
+    color: #7cbcd6;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.container > header h2 {
+    font-size: 16px;
+    font-style: italic;
+    color: #2d6277;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+
+/* Header Style */
+
+.codrops-top {
+    line-height: 24px;
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    z-index: 9999;
+    position: relative;
+    box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.codrops-top a {
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    color: #333;
+    text-shadow: 0px 1px 1px #fff;
+    display: block;
+    float: left;
+}
+
+.codrops-top a:hover {
+    background: #fff;
+}
+
+.codrops-top span.right {
+    float: right;
+}
+
+.codrops-top span.right a {
+    float: left;
+    display: block;
+}
+
+.codrops-demos {
+    text-align: center;
+    display: block;
+    padding: 14px;
+}
+
+.codrops-demos span {
+    display: inline-block;
+    padding-right: 15px;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.codrops-demos a,
+.codrops-demos a.current-demo,
+.codrops-demos a.current-demo:hover {
+    display: inline-block;
+    font-style: italic;
+    font-size: 12px;
+    padding: 3px 5px;
+    margin: 0px 3px;
+    font-weight: 800;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05) inset;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    background: rgba(104, 171, 194, 0.5);
+}
+
+.codrops-demos a:hover {
+    background: #4fa2c4;
+}
+
+.codrops-demos a.current-demo,
+.codrops-demos a.current-demo:hover {
+    color: rgba(104, 171, 194, 1);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.set-position {
+  position: absolute;
+  right: 35px;
+  margin: 7px 0 0 0;
+  z-index: 1;
+}
+
+.error-message {
+    color: #DB5441;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: -12px;
+}
+
+.board-span {
+    height: 110px;
+    width: 300px;
+    float: left;
+    margin: 10px 0 0 10px;
+    padding: 9px 0 0 20px;
+    font-size: 18px;
+    color: #777;
+    cursor: pointer;
+    background: rgba(104, 171, 194, 0.5);
+}
+
+.board-span:hover {
+    background: rgba(0, 176, 168, 0.5);
+}
+
+.shared-board-span:hover {
+    background: rgba(0, 176, 168, 0.5);
+}
+
+.shared-board-span {
+    height: 110px;
+    width: 300px;
+    float: left;
+    margin: 10px 0 0 10px;
+    padding: 9px 0 0 20px;
+    font-size: 18px;
+    color: #777;
+    cursor: pointer;
+    background: rgba(104, 171, 194, 0.5);
+}
+
+.div-main {
+    max-width: 1244px;
+    /* for  below IE7 use `width: 660px;` */
+    margin: 0 auto;
+}
+
+;
+.board {
+    font-size: 24px !important;
+}
+
+.board-main {
+    margin-left: 60px;
+}
+
+.new-list {
+    border-radius: 3px;
+    font-size: 24px;
+    height: 37px;
+    padding: 0px 0 0 8px;
+    width: 167px;
+    color: #777;
+}
+
+.new-board{
+        border-radius: 3px;
+    font-size: 24px;
+    height: 37px;
+    padding: 0px 0 0 8px;
+    width: 167px;
+    color: #777;
+}
+
+.save-list {
+    height: 28px;
+    width: 53px;
+    font-size: 17px;
+    margin: -60px 0 0 172px;
+    background-color: rgb(41, 74, 171) !important;
+    color: #fff;
+    padding: 0 0 0 1px;
+}
+.save-board{
+        height: 28px;
+    width: 53px;
+    font-size: 17px;
+    margin: -89px 0 0 175px;
+    background-color: rgb(41, 74, 171) !important;    color: #fff;
+    padding: 0 0 0 1px;
+}
+
+.created-list {
+    background: rgb(25, 53, 108) none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff !important;
+    cursor: pointer;
+    float: left;
+    font-size: 16px !important;
+    height: 80px;
+    margin: 11px 0 0 10px;
+    padding: 10px 0 0 15px;
+    width: 270px;
+}
+
+.create-card {
+    background-color: rgb(171, 172, 176);
+    font-size: 16px;
+    height: 40px;
+    margin-left: px;
+    margin: 8px 0 0 -15px;
+    text-align: center;
+    padding-top: 9px;
+}
+
+.create-list .popover-inner {
+    height: 66px !important;
+}
+
+
+/*.create-list {
+height: 23px;
+width: 162px;
+}*/
+
+
+/*.list-span {
+display: block;
+height: 56px !important;
+left: 358px;
+top: 153px;
+}*/
+
+
+/*.list-name {
+color: #fff;
+font-size: 24px;
+margin-left: 72px;
+margin-top: 1px;
+padding-bottom: 16px;
+}
+*/
+
+.search-name {
+    margin-left: 100px;
+}
+
+.close-board {
+    height: 22px;
+    cursor: pointer;
+    margin-left: 218px;
+    margin-top: -56px;
+}
+
+.rename-board {
+    height: 26px;
+    width: 70px;
+    padding-top: 2px;
+    padding-left: 9px;
+    margin-left: 169px;
+    margin-top: -42px;
+}
+
+.reopen-board {
+    cursor: pointer;
+    height: 25px;
+    margin-left: 119px;
+    margin-top: -34px;
+    position: absolute;
+}
+
+.header-board {
+    margin-left: 333px;
+    height: 27px;
+    width: 118px;
+}
+
+.warning-message {
+    font-size: 23px;
+}
+
+
+/* enable absolute positioning */
+
+.inner-addon {
+    position: relative;
+}
+
+
+/* style glyph */
+
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+
+/* align glyph */
+
+.left-addon .glyphicon {
+    left: 0px;
+}
+
+.right-addon .glyphicon {
+    right: 0px;
+}
+
+
+/* add padding  */
+
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+.check-icon {
+    cursor: POINTER;
+    position: absolute;
+    margin: 54px 0 0 81px;
+}
+
+.close-icon {
+    cursor: POINTER;
+    position: absolute;
+    margin: 55px 0px 0 62px;
+}
+
+.delete-icon {
+ cursor: pointer;
+    margin: 58px 0 0 -73px;
+}
+
+.share-icon {
+    cursor: POINTER;
+    height: 18px;
+    margin: 53px 0 0 34px;
+    position: absolute;
+}
+
+.closed-board-message {
+    font-size: 30px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.search-textbox {
+    width: 850px;
+    margin: 31px auto;
+    height: 50px;
+    border-radius: 27px;
+    font-size: 35px;
+}
+
+.cross-img {
+    height: 30px;
+    position: absolute;
+    right: 24px;
+    margin-top: -79px;
+    cursor: pointer;
+}
+
+.loader-image {
+    margin: 174px auto;
+    position: absolute;
+    left: 726px;
+}
+
+.modal-error {
+    color: #DB5441;
+    position: absolute;
+    margin-left: 222px;
+}
+
+.row-size {
+    margin-top: 35px;
+    margin-left: 160px;
+}
+
+.board-size {
+    background: rgb(77, 112, 184) none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    height: 110px;
+    margin: 0 64px 6px -57px;
+    width: 267px;;
+}
+
+.create-board {
+    color: #305964;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    height: 110px;
+    margin: 0 64px 6px -57px;
+    width: 267px;
+    background: rgba(182, 203, 466, 249.5);
+}
+
+.board-name {
+    margin: 29px 0 -25px;
+    width: 285px;
+    font-size: 24px;
+    color: #3a5793;
+}
+
+.shared-board-name {
+    margin: 29px 0 -25px;
+    width: 285px;
+    font-size: 24px;
+    color: #3a5793;
+}
+
+.row-fluid .board-size:hover {
+    background: #C9C9D9 !important;
+}
+
+.update-board {
+     color: #777;
+    font-size: 24px;
+    width: 152px;
+}
+
+.set-board-name {
+    margin: 18px 0 0 92px;
+    width: 285px;
+    font-size: 24px;
+    color: #3a5793;
+        position: absolute;
+}
+
+.edit-pen {
+cursor: pointer;
+    position: absolute;
+  margin: 102px 0px 0 144px;
+}
+
+.tools {
+    margin: -27px 0px 0 216px;
+    position: absolute;
+}
+
+#inner-container {
+    white-space: nowrap;
+    width: 190px;
+}
+
+.inner-container {
+    background: rgb(41, 74, 171);
+    border-radius: 3px;
+    color: #fff !important;
+    cursor: pointer;
+    font-size: 20px !important;
+    margin: 62px 0 0 10px;
+    padding: 10px 0 0 15px;
+    width: 270px;
+    text-align: center;
+    display: inline-table;
+}
+
+.create-list {
+    background: rgb(41, 74, 171);
+    border-radius: 3px;
+    color: #fff !important;
+    cursor: pointer;
+    font-size: 20px !important;
+    height: 63px;
+    margin: 62px 0 0 10px;
+    padding-top: 18px;
+    width: 270px;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+}
+
+.created-card {
+    background-color: rgb(148, 164, 213);
+    font-size: 18px;
+    height: 40px;
+    margin: 8px 0px -6px -15px;
+    padding-top: 9px;
+}
+
+.created-card:hover {
+    background: rgb(204, 204, 204);
+}
+
+.save-card {
+    margin: -66px 0 0 173px;
+    height: 28px;
+    width: 53px;
+    font-size: 17px;
+    background-color: rgb(41, 74, 171) !important;    color: #fff;
+    padding: 0 0 0 1px;
+}
+
+.rename-list{
+     position: absolute;
+    width: 207px;
+    margin: -3px 0 0 0px;
+    font-size: 18px;
+    text-align: center;
+}
+.list-pencil{
+    font-size: 12px;
+    left: 85px;
+}
+.card-pencil{
+    font-size: 12px;
+    left: 85px;
+}
+.check-list{
+    font-size: 12px;
+    left: 104px;
+}
+.delete-list-icon{
+    font-size: 12px;
+    left: 100px;  
+}
+.popover .popover-inner{
+        height: 56px;
+}
+
+.rename-card{
+        position: absolute;
+    width: 207px;
+    margin: -31px 0 0 15px;
+    font-size: 18px;
+    text-align: center;
+}
+.delete-card-icon{
+        font-size: 12px;
+    left: 92px;
+}
+.check-card{
+    font-size: 12px;
+    left: 108px;
+}
+.checkbox-icon{
+    margin: 8px 0px 0 109px !important;
+    position: absolute;
+}
+
+.card-status{
+        text-decoration: line-through;
+}
+
+
+    *{
+        -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    }
+    [ng-drag]{
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    [ng-drag]{
+/*        width: 100px;
+        height: 100px;
+        background: rgba(255,0,0, 0.5);
+        color:white;
+        text-align: center;*/
+/*        padding-top:40px;
+        display: inline-block;*/
+        /*margin:0 10px;*/
+        cursor: move;
+    }
+/*    ul.draggable-objects:after{
+        display: block;
+        content:"";
+        clear:both;
+    }*/
+   /* .draggable-objects li{
+        float:left;
+        display: block;
+        width: 120px;
+        height:100px;
+    }*/
+    [ng-drag].drag-over{
+        border:solid 2px rgb(41, 74, 171);
+        background: rgb(255, 255, 102);
+    }
+    [ng-drag].dragging{
+        opacity: 0.5;
+    }
+    [ng-drop]{
+       /* background: rgba(0,255,0, 0.5);*/
+        text-align: center;
+/*        width: 600px;
+        height: 200px;*/
+   /*     padding-top:90px;
+        display: block;
+        margin:20px auto;
+        position: relative;*/
+    }
+    [ng-drop].drag-enter{
+        border:solid 2px rgb(41, 74, 171);
+    }
+    [ng-drop] span.title{
+/*        display: block;
+        position: absolute;
+        top:50%;
+        left:50%;
+        width: 200px;
+        height: 20px;
+        margin-left: -100px;
+        margin-top: -10px;*/
+    }
+    [ng-drop] div{
+        /*position: relative;*/
+        z-index: 2;
+    }

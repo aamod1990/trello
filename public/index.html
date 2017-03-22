@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="UTF-8" />
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+  <title>Trello Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+  <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+  <meta name="author" content="Codrops" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/trello.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/libs/animate-custom.css" />
+  <link rel="stylesheet" type="text/css" href="css/libs/ng-notify.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/libs/ng-tags-input.min.css" />
+  <script src="js/libs/jquery-2.1.4.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.1.js"></script>
+  <script src="js/libs/angular-modal-service.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"></script>
+  <script src="js/libs/ng-notify.min.js"></script>
+  <script src="js/libs/ng-tags-input.min.js"></script>
+   <script src="js/libs/ngDraggable.js"></script>
+  <script src="js/angular/directives/directives.js"></script>
+   <script src="js/angular/services/debounce.js"></script>
+  <script src="js/angular/services/lists.js"></script>
+  <script src="js/angular/services/users.js"></script>
+  <script src="js/angular/services/boards.js"></script>
+  <script src="js/angular/app.js"></script>
+  <script src="js/angular/home.js"></script>
+</head>
+<body data-ng-app="Trello" data-ng-controller="HomeCtrl">
+  <div class="set-position" data-ng-show="authorised">
+    <a href="#/login"><strong>Login</strong> | </a>
+    <a href="#/register"><strong>Register</strong></a>
+  </div>
+
+  <div ng-view></div>
+
+  <script type="text/ng-template" id="createBoardTemplate.html">
+  <div class="form-group">
+    <input type="text" ng-model="newBoard.name" class="form-control new-board">
+  </div>
+  <button class="btn btn-default save-board" data-ng-click="createNewBoard()" ng-disabled="!(newBoard.name)">Create</button>
+  </script>
+  
+  <script type="text/ng-template" id="createListTemplate.html">
+  <div>
+    <input type="text" data-ng-model="newList.name" class="new-list form-control">
+  </div>
+  <button class="btn btn-default save-list" data-ng-click="createNewList()" ng-disabled="!(newList.name)">Save</button>
+  </script>
+
+    <script type="text/ng-template" id="createCardTemplate.html">
+  <div>
+    <input type="text" data-ng-model="newCard.name" class="new-list form-control">
+  </div>
+  <button class="btn btn-default save-card" data-ng-click="createNewCard(item)" ng-disabled="!(newCard.name)">Save</button>
+  </script>
+
+
+  <!-- The actual modal template, just a bit o bootstrap -->
+  <script type="text/ng-template" id="openModal.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <span class="warning-message">Are you sure want to reopen this board?</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary" data-ng-click="reOpenBoard()" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+
+  <script type="text/ng-template" id="closeModal.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <span class="warning-message">Are you sure want to close this board? you can it reopen from user menu.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary" data-ng-click="closeBoard()" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+
+  <script type="text/ng-template" id="deleteModal.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <span class="warning-message">Are you sure want to delete this board? You will not able to see it again after deleting.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary" data-ng-click="deleteBoard()" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+
+  <script type="text/ng-template" id="shareModal.html">
+  <div class="modal fade resize" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document" style="width: 520px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Share Board</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <span  class="modal-error" data-ng-if="invalid"><strong>Invalid email id</strong> </span>
+              
+              <label for="recipient-name" class="control-label tags">Recipient:</label>
+            <tags-input  id="recipient-name" ng-model="emails" allowed-tags-pattern="^[a-zA-Z0-9_.+-\s]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" add-on-space="true" placeholder="Email"><auto-complete source="loadUserEmailIds($query)" min-length="1"></auto-complete>
+            </tags-input>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="5" cols="45" id="message-text" data-ng-model="message" placeholder="Message"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="{{test}}" data-ng-click="shareBoard()">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+  <script type="text/ng-template" id="deleteListModal.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <span class="warning-message">Are you sure want to delete this List? You will not able to see it again after deleting.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary" data-ng-click="deleteList()" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+</body>
+</html>
+
+<script type="text/ng-template" id="deleteCardModal.html">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <span class="warning-message">Are you sure want to delete this card? You will not able to see it again after deleting.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          <button type="button"  class="btn btn-primary" data-ng-click="deleteCard()" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+</body>
+</html>

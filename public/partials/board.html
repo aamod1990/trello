@@ -1,0 +1,80 @@
+<div ng-include="navbarURL"></div>
+<div>
+  <div class="row-fluid" data-ng-if="!searchResultShow">
+    <div class="span8">
+      <div class="span6">
+        <div class="board-name"><strong>Search Results</strong>
+        </div></div>
+      </div>
+    </div>
+    <div class="row-fluid"  data-ng-repeat="item in searchData" data-ng-click="goToBoardDetail(item._id)" data-ng-if="!searchResultShow&&searchPalceHide">
+      <a href="#" data-ng-click="goToBoard(item._id)">
+        <div class="span8 row-size" >
+          <div class="row-fluid" >
+            <div class="span6" >
+              <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+              </div></div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div data-ng-if="!showLoader"><img class="loader-image" src="../images/loader.gif"></div>
+      <div data-ng-if="searchResultShow">
+        <span class="set-board-name">
+          <u data-ng-if="!renameStatus">
+          <strong>{{boardDetail.board[0].name}}
+          </strong>
+          </u>
+          
+          <input data-ng-if="renameStatus" type="text" class="form-control update-board" data-ng-model="board.renameValue"/>
+        </span>
+        
+        <i data-ng-if="(boardDetail.userId==boardDetail.board[0].createdBy)&&!(renameStatus)" title="Edit Board" class="glyphicon glyphicon-pencil edit-pen" data-ng-click="openInputBox()">
+        </i>
+        <span class="tools">
+          <i data-ng-show="!(renameStatus)&&!(boardDetail.userId==boardDetail.board[0].createdBy)" title="Delete Board" class="glyphicon glyphicon-trash delete-icon" delete-board data-ng-click="deleteBoard()"></i>
+          
+          <img data-ng-if="renameStatus" title ="Share Board" share-board class="share-icon" src="../images/share.png" data-ng-click="shareBoard()">
+          
+          <i data-ng-if="renameStatus" title="Close Board" class="glyphicon glyphicon-trash close-icon" close-board data-ng-click="closeBoard()"></i>
+          
+          <i data-ng-if="renameStatus" title="Rename Board" class="glyphicon glyphicon-ok check-icon" ng-click="renameBoard()"></i>
+        </span>
+      </div>
+      <div id="inner-container">
+        <div class="inner-container" data-ng-if="searchResultShow" data-ng-repeat="(pindex,item) in list.lists.lists" >
+          
+          <span ng-hide="item.show" tooltip-html-unsafe="<strong>Created by: {{item.createdBy._id==list.lists.userId? 'You':item.createdBy.name}}</strong> " tooltip-placement="top">{{item.name}}</span>
+
+          <input type="text" ng-hide="!item.show" class="form-control rename-list listName" data-ng-model="list.newListName">
+
+          <i title="Edit list name" ng-if="(!(item.show)&&(item.createdBy._id==list.lists.userId))||(!(item.show)&&(boardDetail.board[0].createdBy==list.lists.userId))" class="glyphicon glyphicon-pencil list-pencil" data-ng-click="openListBox($index)"></i>
+
+          <i title="Delete List" ng-hide="!item.show" class="glyphicon glyphicon-trash delete-list-icon" delete-list data-ng-click="deleteList(item._id,$index)"></i>
+
+          <i title="Rename List" ng-hide="!item.show" class="glyphicon glyphicon-ok check-list" ng-click="updateListName($index,item._id)"></i>
+         
+          <div ng-drop="true" ng-drop-success="onDropComplete(pindex,$index,item._id,card._id,$data,$event)" data-ng-class="{'created-card':card.status==false,'created-card card-status':card.status==true}" data-ng-repeat="card in item.cards track by $index" ng-drag="(!(card.showCardEdit)&&(card.createdBy._id==list.lists.userId))||(!(card.showCardEdit)&&(boardDetail.board[0].createdBy==list.lists.userId))" ng-drag-data="card" ng-drag-success="onDragSuccess(pindex,$index,item._id,card._id,$data,$event)">
+
+          <span tooltip-html-unsafe="<strong>Created by: {{card.createdBy._id==list.lists.userId? 'You':card.createdBy.name}}</strong> " tooltip-placement="top">{{card.name}}</span>
+           
+            <input type="text" ng-hide="!(card.showCardEdit)" class="form-control rename-card listName" data-ng-model="list.newCardName">
+
+            <i title="Edit card name" ng-if="(!(card.showCardEdit)&&(card.createdBy._id==list.lists.userId))||(!(card.showCardEdit)&&(boardDetail.board[0].createdBy==list.lists.userId))" class="glyphicon glyphicon-pencil card-pencil" data-ng-click="openCardBox(pindex,$index)"></i>
+
+            <input ng-hide="!(card.showCardEdit)" data-ng-model="card.status"  class="checkbox-icon" type="checkbox" data-ng-click="cardStatus(pindex,$index,item._id,card._id)" title="Change status">
+            
+            <i title="Delete Card" ng-hide="!((card.showCardEdit))" class="glyphicon glyphicon-trash delete-card-icon" delete-card data-ng-click="deleteCard(item._id,card._id,$index,pindex)">
+            </i>
+
+            <i title="Rename Card" ng-hide="!(card.showCardEdit)" class="glyphicon glyphicon-ok check-card" ng-click="updateCardName(pindex,$index,item._id,card._id)">
+            </i>
+          </div>
+          <!--  <div class="created-card">new card
+          </div> -->
+          <div ng-drop="item.cards.length==0" ng-drop-success="onDropComplete(pindex,$index,item._id,card._id,$data,$event)" ng-drag="false" ng-drag-data="card" ng-drag-success="onDragSuccess(pindex,$index,item._id,card._id,$data,$event)" class="create-card"  popover-template="newCard.templateUrl" popover-placement="bottom"><span >Add a card...</span>
+        </div>
+      </div>
+      <div class="create-list" data-ng-if="searchResultShow" popover-template="newList.templateUrl" popover-placement="bottom"><span>Add a list...</span></div>
+    </div>
+  </div>

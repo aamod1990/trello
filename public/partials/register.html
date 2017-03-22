@@ -1,0 +1,41 @@
+<div class="container" data-ng-controller="RegisterCtrl">
+  <section>
+    <div id="container_demo" >
+      <div id="wrapper">
+        <div id="login" class="animate form">
+          <form autocomplete="on">
+            <h1> Sign up </h1>
+            <p>
+              <span  class="error-message" data-ng-show="invalid"><strong>{{message}}</strong> </span>
+             
+            </p>
+            <p>
+              <label for="usernamesignup" class="uname" data-icon="u">Name</label>
+              <input id="username"  type="text" data-ng-model="form.name" placeholder="myname" data-ng-pattern="/^[A-Za-z0-9\s]+$/" />
+            </p>
+            <p>
+              <label for="username" class="uname" data-icon="u" > Email Id </label>
+              <input id="username"  data-ng-model="form.email" type="text" placeholder="mymail@mail.com" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,10}$/"/>
+            </p>
+            <p>
+              <label for="password" class="youpasswd" data-icon="p"> Password </label>
+              <input id="password"  data-ng-model="form.password" type="password" placeholder="eg. X8df!90EO" ng-minlength="6"/>
+            </p>
+            <p>
+              <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm password </label>
+              <input id="passwordsignup_confirm" name="passwordsignup_confirm"  type="password" data-ng-model="form.repeatPassword" placeholder="eg. X8df!90EO"/>
+            </p>
+            <p class="login button">
+              <input type="submit" value="Register" data-ng-click="submitForm()" />
+            </p>
+            <p class="change_link">
+              
+            </p>
+          </form>
+        </div>
+        
+        
+      </div>
+    </div>
+  </section>
+</div>

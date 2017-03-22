@@ -1,0 +1,71 @@
+<div ng-include="navbarURL"></div>
+<div class="container">
+  <div class="row-fluid" data-ng-if="searchResultShow">
+    <div class="span8">
+      <div class="span6">
+        <div class="board-name" data-ng-if="(boards.results[0].boards.length>0)"><strong>My Boards</strong>
+        </div></div>
+      </div>
+    </div>
+    <div class="row-fluid" data-ng-if="!searchResultShow">
+      <div class="span8">
+        <div class="span6">
+          <div class="board-name"><strong>Search Results</strong>
+          </div></div>
+        </div>
+      </div>
+      <div class="row-fluid" data-ng-if="searchResultShow" data-ng-repeat="item in boards.results[0].boards">
+        <a href="#" data-ng-click="goToBoard(item._id)">
+          <div class="span8 row-size" >
+            <div class="row-fluid" >
+              <div class="span6" >
+                <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy._id==boards.userId? 'You':item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+                </div></div>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="row-fluid" data-ng-if="boards.results[0].boards.length>0&&searchResultShow">
+          <a href="#"  stop-propgation>
+            <div class="span8 row-size">
+              <div class="row-fluid" >
+                <div class="span6" >
+                  <div class="well create-board" popover-template="newBoard.templateUrl" popover-placement="bottom"><strong>Create new board...</strong>
+                  </div></div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="row-fluid"  data-ng-repeat="item in searchData" data-ng-click="goToBoardDetail(item._id)" data-ng-if="!searchResultShow&&searchPalceHide">
+            <a href="#" data-ng-click="goToBoard(item._id)">
+              <div class="span8 row-size" >
+                <div class="row-fluid" >
+                  <div class="span6" >
+                    <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+                    </div></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="container" style="width: 1400px;">
+            <div class="row-fluid" data-ng-if="searchResultShow&&boards.results[1].sharedBoards.length>0">
+              <div class="span8">
+                <div class="span6">
+                  <div class="shared-board-name"><strong>Shared Boards</strong>
+                  </div></div>
+                </div>
+              </div>
+              
+              <div class="row-fluid" data-ng-if="searchResultShow" data-ng-repeat="item in boards.results[1].sharedBoards">
+                <a href="#" data-ng-click="goToBoard(item._id,'shared')">
+                  <div class="span8 row-size" >
+                    <div class="row-fluid" >
+                      <div class="span6" >
+                        <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+                        </div></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>

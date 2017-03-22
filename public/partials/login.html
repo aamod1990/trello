@@ -1,0 +1,39 @@
+<div class="container" data-ng-controller="LoginCtrl">
+  
+  <section>
+    <div id="container_demo" >
+      <a class="hiddenanchor" id="toregister"></a>
+      <a class="hiddenanchor" id="tologin"></a>
+      <div id="wrapper">
+        <div id="login" class="animate form">
+          <form  autocomplete="on">
+            <h1>Log in</h1>
+             <p>
+              <span  class="error-message" data-ng-show="invalid"><strong>{{message}}</strong> </span>
+             
+            </p>
+            <p>
+              <label for="username" class="uname" data-icon="u" > Email Id</label>
+              <input id="username" name="username" data-ng-model="form.email"  type="text" placeholder="mymail@mail.com" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,10}$/"/>
+            </p>
+            <p>
+              <label for="password" class="youpasswd" data-icon="p"> Password </label>
+              <input id="password" name="password"  type="password" placeholder="eg. X8df!90EO" data-ng-model="form.password" ng-minlength="6"/>
+            </p>
+         <!--    <p class="keeplogin">
+              <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+              <label for="loginkeeping">Keep me logged in</label>
+            </p> -->
+            <p class="login button">
+              <input type="submit" value="Login" data-ng-click="login()" />
+            </p>
+            <p class="change_link">
+              
+            </p>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+</div>

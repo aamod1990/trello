@@ -1,0 +1,44 @@
+  <div ng-include="navbarURL"></div>
+<div class="container">
+  <div class="row-fluid" data-ng-if="searchResultShow">
+    <div class="span8">
+      <div class="span6">
+        <div class="board-name"><strong>My Closed Boards</strong>
+        </div></div>
+      </div>
+    </div>
+    <div class="row-fluid" data-ng-if="!searchResultShow">
+      <div class="span8">
+        <div class="span6">
+          <div class="board-name"><strong>Search Results</strong>
+          </div></div>
+        </div>
+      </div>
+      <div class="row-fluid" data-ng-if="searchResultShow" data-ng-repeat="item in closedBoardsData.closedBoards">
+        <a href="#" data-ng-click="goToBoard(item._id)" data-ng-if="!(item.active)">
+          <div class="span8 row-size" >
+            <div class="row-fluid" >
+              <div class="span6" >
+                <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy._id==closedBoardsData.userId? 'You':item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+                <div><img title="Reopen" class="reopen-board" src="../images/reopen.png" open-board data-ng-click="show(item._id)"></div>
+      </div>
+                </div></div>
+              </div>
+            </div>
+          </a>
+        </div>
+       
+          <div class="row-fluid"  data-ng-repeat="item in searchData" data-ng-click="goToBoardDetail(item._id)" data-ng-if="!searchResultShow&&searchPalceHide">
+            <a href="#" data-ng-click="goToBoard(item._id)">
+              <div class="span8 row-size" >
+                <div class="row-fluid" >
+                  <div class="span6" >
+                    <div class="well board-size" tooltip-html-unsafe="<strong>Board Name: {{item.name}}<br />Created by: {{item.createdBy.name}}<br />Created At: {{item.createdAt}}</strong> " tooltip-placement="top"><strong>{{item.name}}</strong>
+                    </div></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+            <div data-ng-if="closedBoardsData.length==0" class="closed-board-message"><center>There are no closed boards.</center></div>
+   <div data-ng-if="!showLoader"><img class="loader-image" src="../images/loader.gif"></div>
