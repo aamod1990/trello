@@ -4,7 +4,7 @@
 ## Running Locally
 
 ```sh
-git clone https://abdul-raw@bitbucket.org/abdul-raw/trello.git
+git clone https://github.com/aamod1990/trello.git
 
 npm install
 
